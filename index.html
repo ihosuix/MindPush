@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="IR" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="src/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <title>MindPush</title>
+
+    <style>
+    body { font-family: 'Inter', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    textarea:focus { outline: none; }
+    .tab-active {
+      border-bottom: 2px solid #18181b;
+      color: #18181b;
+    }
+    .tab-inactive {
+      border-bottom: 2px solid transparent;
+      color: #a1a1aa;
+    }
+  </style>
+
+  </head>
+
+  
+<body class="bg-white min-h-screen flex flex-col items-center justify-center">
+ 
+  <!-- Logo -->
+  <div class="mb-10 text-center">
+    <span class="mono text-xl font-medium text-zinc-800 tracking-tight">mind<span class="text-violet-500">push</span></span>
+  </div>
+ 
+  <!-- Card -->
+  <div class="w-full max-w-2xl border border-zinc-200 rounded-2xl overflow-hidden shadow-sm">
+ 
+    <!-- Tabs -->
+    <div class="flex border-b border-zinc-200 px-6 pt-4 gap-6">
+      <button class="tab-active pb-3 text-sm font-medium transition-colors">کامیت‌ها</button>
+      <button class="tab-inactive pb-3 text-sm font-medium transition-colors">نوشتن</button>
+      <button class="tab-inactive pb-3 text-sm font-medium transition-colors">تاریخچه</button>
+    </div>
+ 
+    <!-- Write area -->
+    <div class="p-6">
+      <textarea
+        rows="8"
+        placeholder="فکرت رو اینجا بنویس..."
+        class="w-full resize-none text-zinc-800 text-sm leading-relaxed placeholder-zinc-300 border-0 bg-transparent"
+      ></textarea>
+    </div>
+ 
+    <!-- Footer -->
+    <div class="px-6 pb-5 flex items-center justify-between">
+      <button class="bg-zinc-900 hover:bg-zinc-700 text-white text-sm font-medium px-5 py-2.5 rounded-xl transition-colors mono">
+        → commit 
+      </button>
+      <span class="mono text-xs text-zinc-300">~/mindpush $</span>
+    </div>
+ 
+  </div>
+ 
+  <!-- Subtle hint -->
+  <p class="mt-6 text-xs text-zinc-300 mono">هر فکری ارزش یه کامیت داره</p>
+
+  </body>
+</html>
