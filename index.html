@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="assets/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <title>MindPush</title>
 
@@ -36,19 +36,23 @@
  
     <!-- Tabs -->
     <div class="flex border-b border-zinc-200 px-6 pt-4 gap-6">
-      <button class="tab-active pb-3 text-sm font-medium transition-colors">کامیت‌ها</button>
-      <button class="tab-inactive pb-3 text-sm font-medium transition-colors">نوشتن</button>
-      <button class="tab-inactive pb-3 text-sm font-medium transition-colors">تاریخچه</button>
+      <button id="tab-commit" class="tab-inactive pb-3 text-sm font-medium transition-colors">کامیت‌ها</button>
+      <button id="tab-write" class="tab-active pb-3 text-sm font-medium transition-colors">نوشتن</button>
+      <button id="tab-history" class="tab-inactive pb-3 text-sm font-medium transition-colors">تاریخچه</button>
     </div>
  
     <!-- Write area -->
-    <div class="p-6">
+ <div id="content-write" class="p-6">
       <textarea
         rows="8"
         placeholder="فکرت رو اینجا بنویس..."
         class="w-full resize-none text-zinc-800 text-sm leading-relaxed placeholder-zinc-300 border-0 bg-transparent"
       ></textarea>
     </div>
+
+    <div id="content-commit"></div>
+
+    <div id="content-history"></div>
  
     <!-- Footer -->
     <div class="px-6 pb-5 flex items-center justify-between">
@@ -62,6 +66,8 @@
  
   <!-- Subtle hint -->
   <p class="mt-6 text-xs text-zinc-300 mono">هر فکری ارزش یه کامیت داره</p>
+
+  <script src="main.js"></script>
 
   </body>
 </html>
