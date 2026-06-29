@@ -19,12 +19,21 @@ function updateCount() {
   }
 }
 
-updateCount()
+const toast = document.getElementById('toast')
 
-if(commits.length === 0) {
-  commitList.innerHTML = `
-    <p class="mono text-xs text-zinc-300 text-center mt-16">هنوز چیزی ننوشتی ✦</p>
-  `
+function showToast(message, type) {
+  toast.textContent = message
+  if(type === 'success') {
+    toast.style.background = '#18181b'
+    toast.style.color = '#fff'
+  } else {
+    toast.style.background = '#fee2e2'
+    toast.style.color = '#ef4444'
+  }
+  toast.style.opacity = '1'
+  setTimeout(function() {
+    toast.style.opacity = '0'
+  }, 2500)
 }
 
 commits.slice().reverse().forEach(function(commit) {
@@ -62,12 +71,13 @@ tabs.forEach(function(tab) {
 })
 
 commitBtn.addEventListener('click', function() {
+    showToast('کامیت شد ✓', 'success')
   const text = input.value
 
-  if(text === '') {
-    alert('چیزی ننوشتی!')
-    return
-  }
+if(text.trim() === '') {
+  showToast('چیزی ننوشتی! ✦', 'error')
+  return
+}
 
   const now = new Date()
   const date = now.toLocaleDateString('fa-IR')
