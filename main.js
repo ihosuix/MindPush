@@ -19,6 +19,8 @@ function updateCount() {
   }
 }
 
+updateCount()
+
 const toast = document.getElementById('toast')
 
 function showToast(message, type) {
@@ -36,12 +38,18 @@ function showToast(message, type) {
   }, 2500)
 }
 
+if(commits.length === 0) {
+  commitList.innerHTML = `
+    <p class="mono text-xs text-zinc-300 text-center mt-16">هنوز چیزی ننوشتی ✦</p>
+  `
+}
+
 commits.slice().reverse().forEach(function(commit) {
   const div = document.createElement('div')
   div.innerHTML = `
     <div class="commit-item py-4 border-b border-zinc-100">
       <p class="text-sm text-zinc-800 mb-1">${commit.text}</p>
-      <span class="mono text-[0.7rem] text-zinc-300">${commit.date} — ${commit.time}</span>
+      <span class="text-[0.7rem] text-zinc-300">${commit.date} — ${commit.time}</span>
     </div>
   `
   commitList.appendChild(div)
@@ -71,13 +79,12 @@ tabs.forEach(function(tab) {
 })
 
 commitBtn.addEventListener('click', function() {
-    showToast('کامیت شد ✓', 'success')
   const text = input.value
 
-if(text.trim() === '') {
-  showToast('چیزی ننوشتی! ✦', 'error')
-  return
-}
+  if(text.trim() === '') {
+    showToast('چیزی ننوشتی! ✦', 'error')
+    return
+  }
 
   const now = new Date()
   const date = now.toLocaleDateString('fa-IR')
@@ -87,7 +94,7 @@ if(text.trim() === '') {
   div.innerHTML = `
     <div class="commit-item py-4 border-b border-zinc-100">
       <p class="text-sm text-zinc-800 mb-1">${text}</p>
-      <span class="mono text-[0.7rem] text-zinc-300">${date} — ${time}</span>
+      <span class="text-[0.7rem] text-zinc-300">${date} — ${time}</span>
     </div>
   `
   commitList.insertBefore(div, commitList.firstChild)
@@ -95,6 +102,7 @@ if(text.trim() === '') {
   localStorage.setItem('commits', JSON.stringify(commits))
   input.value = ''
   updateCount()
+  showToast('کامیت شد ✓', 'success')
 })
 
 input.addEventListener('keydown', function(e) {
