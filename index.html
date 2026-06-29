@@ -20,57 +20,58 @@
     </style>
   </head>
 
-  <body class="bg-zinc-100 min-h-screen flex flex-col items-center justify-center px-4">
+  <body class="bg-zinc-100 min-h-screen flex flex-col items-center justify-center px-4 py-8">
 
     <!-- Logo -->
-    <div class="mb-8 flex items-center gap-2">
+    <div class="mb-6 sm:mb-8 flex items-center gap-2">
       <span class="mono text-lg text-zinc-700 tracking-tight">
         mind<span class="text-violet-500">push</span>
       </span>
-      <span class="mono text-[0.65rem] text-zinc-300 border border-zinc-200 rounded px-1.5 py-0.5">v0.4</span>
+      <span class="mono text-[0.65rem] text-zinc-300 border border-zinc-200 rounded px-1.5 py-0.5">v0.5</span>
     </div>
 
     <!-- Card -->
-    <div class="w-full max-w-xl bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-sm">
+    <div class="w-full max-w-xl bg-white border border-zinc-200 rounded-xl sm:rounded-2xl overflow-hidden shadow-sm">
 
       <!-- Tabs -->
-      <div class="flex border-b border-zinc-100 px-6 gap-6">
-<button id="tab-commit" class="tab-inactive pb-3.5 pt-4 text-xs font-medium transition-colors bg-transparent border-0 cursor-pointer">
-  کامیت‌ها <span id="commit-count" class="mono text-zinc-300"></span>
-</button>
+      <div class="flex border-b border-zinc-100 px-4 sm:px-6 gap-4 sm:gap-6">
+        <button id="tab-commit" class="tab-inactive pb-3.5 pt-4 text-xs font-medium transition-colors bg-transparent border-0 cursor-pointer">
+          کامیت‌ها <span id="commit-count" class="mono text-zinc-300"></span>
+        </button>
         <button id="tab-write" class="tab-active pb-3.5 pt-4 text-xs font-medium transition-colors bg-transparent border-0 cursor-pointer">نوشتن</button>
         <button id="tab-history" class="tab-inactive pb-3.5 pt-4 text-xs font-medium transition-colors bg-transparent border-0 cursor-pointer">تاریخچه</button>
       </div>
 
       <!-- Content: Write -->
-      <div id="content-write" class="flex flex-col h-80 content-panel">
+      <div id="content-write" class="flex flex-col h-64 sm:h-80 content-panel">
         <textarea
           id="thought-input"
           placeholder="فکرت رو اینجا بنویس..."
-          class="flex-1 resize-none w-full p-6 text-sm leading-7 text-zinc-800 bg-transparent border-0"
+          class="flex-1 resize-none w-full p-4 sm:p-6 text-sm leading-7 text-zinc-800 bg-transparent border-0"
         ></textarea>
-        <div class="px-6 py-4 flex items-center justify-between border-t border-zinc-100">
-          <span class="mono text-[0.7rem] text-zinc-300">~/mindpush $</span>
-          <button id="commit-btn" class="mono bg-zinc-900 hover:bg-zinc-600 text-white text-xs font-medium px-5 py-2 rounded-xl border-0 cursor-pointer transition-colors">
+        <div class="px-4 sm:px-6 py-4 flex items-center justify-between border-t border-zinc-100">
+          <span class="mono text-[0.7rem] text-zinc-300 hidden sm:block">~/mindpush $</span>
+          <button id="commit-btn" class="mono bg-zinc-900 hover:bg-zinc-600 text-white text-xs font-medium px-5 py-2 rounded-xl border-0 cursor-pointer transition-colors w-full sm:w-auto">
             commit →
           </button>
         </div>
       </div>
 
       <!-- Content: Commits -->
-      <div id="content-commit" class="commit-scroll h-80 overflow-y-auto px-6 hidden content-panel"></div>
+      <div id="content-commit" class="commit-scroll h-64 sm:h-80 overflow-y-auto px-4 sm:px-6 hidden content-panel"></div>
 
       <!-- Content: History -->
-      <div id="content-history" class="h-80 px-6 flex items-center justify-center hidden content-panel">
+      <div id="content-history" class="h-64 sm:h-80 px-4 sm:px-6 flex items-center justify-center hidden content-panel">
         <p class="mono text-xs text-zinc-300">به زودی...</p>
       </div>
 
     </div>
 
     <!-- Hint -->
-    <p class="mono text-[0.7rem] text-zinc-300 mt-6">هر فکری ارزش یه کامیت داره</p>
+    <p class="mono text-[0.7rem] text-zinc-300 mt-6 hidden sm:block">هر فکری ارزش یه کامیت داره</p>
+
+    <div id="toast" class="fixed bottom-6 right-1/2 translate-x-1/2 px-4 py-2.5 rounded-xl text-xs font-medium mono opacity-0 transition-all duration-300 pointer-events-none"></div>
 
     <script type="module" src="main.js"></script>
-<div id="toast" class="fixed bottom-6 right-1/2 translate-x-1/2 px-4 py-2.5 rounded-xl text-xs font-medium mono opacity-0 transition-all duration-300 pointer-events-none"></div>
   </body>
 </html>
