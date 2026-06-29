@@ -15,9 +15,9 @@ const commitList = document.getElementById('content-commit')
 commits.forEach(function(commit) {
   const div = document.createElement('div')
   div.innerHTML = `
-    <div class="flex flex-col gap-1 py-4 border-b border-zinc-100">
-      <p class="text-sm text-zinc-800">${commit.text}</p>
-      <span class="mono text-xs text-zinc-400">${commit.date} — ${commit.time}</span>
+    <div class="commit-item py-4 border-b border-zinc-100">
+      <p class="text-sm text-zinc-800 mb-1">${commit.text}</p>
+      <span class="mono text-[0.7rem] text-zinc-300">${commit.date} — ${commit.time}</span>
     </div>
   `
   commitList.appendChild(div)
@@ -48,21 +48,21 @@ tabs.forEach(function(tab) {
 
 commitBtn.addEventListener('click', function() {
   const text = input.value
-  
+
   if(text === '') {
     alert('چیزی ننوشتی!')
     return
   }
-  
+
   const now = new Date()
   const date = now.toLocaleDateString('fa-IR')
   const time = now.toLocaleTimeString('fa-IR')
 
   const div = document.createElement('div')
   div.innerHTML = `
-    <div class="flex flex-col gap-1 py-4 border-b border-zinc-100">
-      <p class="text-sm text-zinc-800">${text}</p>
-      <span class="mono text-xs text-zinc-400">${date} — ${time}</span>
+    <div class="commit-item py-4 border-b border-zinc-100">
+      <p class="text-sm text-zinc-800 mb-1">${text}</p>
+      <span class="mono text-[0.7rem] text-zinc-300">${date} — ${time}</span>
     </div>
   `
   commitList.appendChild(div)

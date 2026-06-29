@@ -1,76 +1,73 @@
 <!doctype html>
-<html lang="IR" dir="rtl">
+<html lang="fa" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
     <title>MindPush</title>
-
     <style>
-    body { font-family: 'Inter', sans-serif; }
-    .mono { font-family: 'JetBrains Mono', monospace; }
-    textarea:focus { outline: none; }
-    .tab-active {
-      border-bottom: 2px solid #18181b;
-      color: #18181b;
-    }
-    .tab-inactive {
-      border-bottom: 2px solid transparent;
-      color: #a1a1aa;
-    }
-  </style>
-
+      body { font-family: 'Vazirmatn', sans-serif; }
+      .mono { font-family: 'JetBrains Mono', monospace; }
+      textarea:focus { outline: none; }
+      textarea::placeholder { color: #d4d4d8; }
+      .tab-active { color: #18181b; border-bottom: 1.5px solid #18181b; }
+      .tab-inactive { color: #d4d4d8; border-bottom: 1.5px solid transparent; }
+      .tab-inactive:hover { color: #a1a1aa; }
+      .commit-scroll::-webkit-scrollbar { width: 3px; }
+      .commit-scroll::-webkit-scrollbar-thumb { background: #e4e4e7; border-radius: 99px; }
+      .commit-item:last-child { border-bottom: none; }
+    </style>
   </head>
 
-  
-<body class="bg-white min-h-screen flex flex-col items-center justify-center">
- 
-  <!-- Logo -->
-  <div class="mb-10 text-center">
-    <span class="mono text-xl font-medium text-zinc-800 tracking-tight">mind<span class="text-violet-500">push</span></span>
-  </div>
- 
-  <!-- Card -->
-  <div class="w-full max-w-2xl border border-zinc-200 rounded-2xl overflow-hidden shadow-sm">
- 
-    <!-- Tabs -->
-    <div class="flex border-b border-zinc-200 px-6 pt-4 gap-6">
-      <button id="tab-commit" class="tab-inactive pb-3 text-sm font-medium transition-colors">کامیت‌ها</button>
-      <button id="tab-write" class="tab-active pb-3 text-sm font-medium transition-colors">نوشتن</button>
-      <button id="tab-history" class="tab-inactive pb-3 text-sm font-medium transition-colors">تاریخچه</button>
-    </div>
- 
-    <!-- Write area -->
- <div id="content-write" class="p-6">
-      <textarea
-      id="thought-input"
-        rows="8"
-        placeholder="فکرت رو اینجا بنویس..."
-        class="w-full resize-none text-zinc-800 text-sm leading-relaxed placeholder-zinc-300 border-0 bg-transparent"
-      ></textarea>
+  <body class="bg-zinc-100 min-h-screen flex flex-col items-center justify-center px-4">
 
-          <div class="flex items-center justify-between">
-      <button id="commit-btn" class="bg-zinc-900 hover:bg-zinc-700 text-white text-sm font-medium px-5 py-2.5 rounded-xl transition-colors mono">
-        → commit 
-      </button>
-      <span class="mono text-xs text-zinc-300">~/mindpush $</span>
+    <!-- Logo -->
+    <div class="mb-8 flex items-center gap-2">
+      <span class="mono text-lg text-zinc-700 tracking-tight">
+        mind<span class="text-violet-500">push</span>
+      </span>
+      <span class="mono text-[0.65rem] text-zinc-300 border border-zinc-200 rounded px-1.5 py-0.5">v0.1</span>
     </div>
 
+    <!-- Card -->
+    <div class="w-full max-w-xl bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-sm">
+
+      <!-- Tabs -->
+      <div class="flex border-b border-zinc-100 px-6 gap-6">
+        <button id="tab-commit" class="tab-inactive pb-3.5 pt-4 text-xs font-medium transition-colors bg-transparent border-0 cursor-pointer">کامیت‌ها</button>
+        <button id="tab-write" class="tab-active pb-3.5 pt-4 text-xs font-medium transition-colors bg-transparent border-0 cursor-pointer">نوشتن</button>
+        <button id="tab-history" class="tab-inactive pb-3.5 pt-4 text-xs font-medium transition-colors bg-transparent border-0 cursor-pointer">تاریخچه</button>
+      </div>
+
+      <!-- Content: Write -->
+      <div id="content-write" class="flex flex-col h-80">
+        <textarea
+          id="thought-input"
+          placeholder="فکرت رو اینجا بنویس..."
+          class="flex-1 resize-none w-full p-6 text-sm leading-7 text-zinc-800 bg-transparent border-0"
+        ></textarea>
+        <div class="px-6 py-4 flex items-center justify-between border-t border-zinc-100">
+          <span class="mono text-[0.7rem] text-zinc-300">~/mindpush $</span>
+          <button id="commit-btn" class="mono bg-zinc-900 hover:bg-zinc-600 text-white text-xs font-medium px-5 py-2 rounded-xl border-0 cursor-pointer transition-colors">
+            commit →
+          </button>
+        </div>
+      </div>
+
+      <!-- Content: Commits -->
+      <div id="content-commit" class="commit-scroll h-80 overflow-y-auto px-6 hidden"></div>
+
+      <!-- Content: History -->
+      <div id="content-history" class="h-80 px-6 flex items-center justify-center hidden">
+        <p class="mono text-xs text-zinc-300">به زودی...</p>
+      </div>
+
     </div>
 
-<div id="content-commit" class="px-6 h-64 overflow-y-auto"></div>
+    <!-- Hint -->
+    <p class="mono text-[0.7rem] text-zinc-300 mt-6">هر فکری ارزش یه کامیت داره</p>
 
-    <div id="content-history"></div>
- 
-
- 
-  </div>
- 
-  <!-- Subtle hint -->
-  <p class="mt-6 text-xs text-zinc-300 mono">هر فکری ارزش یه کامیت داره</p>
-
-  <script src="main.js"></script>
-
+    <script type="module" src="main.js"></script>
   </body>
 </html>
