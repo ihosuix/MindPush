@@ -11,8 +11,23 @@ const contents = document.querySelectorAll('div[id^="content-"]')
 const input = document.getElementById('thought-input')
 const commitBtn = document.getElementById('commit-btn')
 const commitList = document.getElementById('content-commit')
+const commitCount = document.getElementById('commit-count')
 
-commits.forEach(function(commit) {
+function updateCount() {
+  if(commits.length > 0) {
+    commitCount.textContent = '(' + commits.length + ')'
+  }
+}
+
+updateCount()
+
+if(commits.length === 0) {
+  commitList.innerHTML = `
+    <p class="mono text-xs text-zinc-300 text-center mt-16">هنوز چیزی ننوشتی ✦</p>
+  `
+}
+
+commits.slice().reverse().forEach(function(commit) {
   const div = document.createElement('div')
   div.innerHTML = `
     <div class="commit-item py-4 border-b border-zinc-100">
@@ -65,8 +80,15 @@ commitBtn.addEventListener('click', function() {
       <span class="mono text-[0.7rem] text-zinc-300">${date} — ${time}</span>
     </div>
   `
-  commitList.appendChild(div)
+  commitList.insertBefore(div, commitList.firstChild)
   commits.push({ text: text, date: date, time: time })
   localStorage.setItem('commits', JSON.stringify(commits))
   input.value = ''
+  updateCount()
+})
+
+input.addEventListener('keydown', function(e) {
+  if(e.ctrlKey && e.key === 'Enter') {
+    commitBtn.click()
+  }
 })
